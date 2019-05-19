@@ -24,7 +24,7 @@ body {
   margin: 50px auto;
 }
 
-.button {
+.allbuttons {
   padding: 20px;
   border-radius: 5px;
   border: none;
@@ -33,6 +33,7 @@ body {
   font-size: 20px;
   cursor: pointer;
   text-transform: uppercase;
+  outline: none;
 }
 
 #rock-btn {
@@ -79,6 +80,7 @@ body {
   border-radius: 5px;
   border: none;
   cursor: pointer;
+  outline: none;
 }
 
 #new-game-btn:hover {

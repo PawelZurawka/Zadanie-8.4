@@ -1,34 +1,95 @@
 'use strict'
-debugger;
 var rockBtn = document.getElementById('rock-btn');
 var paperBtn = document.getElementById('paper-btn');
 var scissorsBtn = document.getElementById('scissors-btn');
 var output = document.getElementById('result-output');
-var firstMessage = 'What you choose? Stone, paper or scissors?';
-
+var firstMessage = 'What you choose? Rock, paper or scissors?';
+//var buttons = document.getElementsByClassName('allbuttons');
 
 var resultsOutput = function(text) {
   output.innerHTML = text;
-}
+};
 
+//function numToText(result) {
+ // if (result == 1) {
+ //   return "ROCK";
+ // } else if (result == 2) {
+ //   return "PAPER";
+ // } else if (result == 3) {
+ //   return "SCISSORS";
+ // }
+//}
+
+//First message
 resultsOutput(firstMessage);
 
+//Player move
+var playerMove = function(playerChoice) {
+  var computerChoice = randomPcChoice();
+
+  if (computerChoice === 1) {
+    computerChoice = 'ROCK';
+  }
+
+  else if (computerChoice === 2) {
+    computerChoice = 'PAPER';
+  }
+
+  else {
+    computerChoice = 'SCISSORS';
+  }
+  //rock = 1
+  //paper = 2
+  //scissors = 3
+  if (playerChoice === computerChoice) {
+      resultsOutput('Computer choose ' + computerChoice + '<br>REMIS!<br>');
+  }
+  else if ((playerChoice === 1 && computerChoice === 3) || (playerChoice === 2 && computerChoice === 1) || (playerChoice === 3 && computerChoice === 2)) {
+    resultsOutput('Computer choose ' + computerChoice + '<br>WYGRAŁEŚ!<br>');
+  }
+  else {
+    resultsOutput('Computer choose ' + computerChoice + '<br>PRZEGRAŁEŚ!<br>');
+  }
+    console.log(playerChoice);
+    console.log(computerChoice);
+};
+
 //Random computer choice
-
 var randomPcChoice = function() {
-    var randomPcChoice = Math.floor(Math.random() * 3 + 1);
-    return randomPcChoice;
-}
+  return Math.floor(Math.random() * 3 + 1);
+};
 
-var buttons = document.getElementsByClassName('button');
+rockBtn.addEventListener('click', function() {
+  playerMove(1);
+  output.insertAdjacentHTML('afterbegin', 'You choose ROCK<br>');
+});
 
-buttons = ['rock', 'paper', 'scissors'];
+paperBtn.addEventListener('click', function() {
+  playerMove(2);
+  output.insertAdjacentHTML('afterbegin', 'You choose PAPER<br>');
+});
+
+scissorsBtn.addEventListener('click', function() {
+  playerMove(3);
+  output.insertAdjacentHTML('afterbegin', 'You choose SCISSORS<br>');
+});
+
+/*
+
+
+buttons.addEventListener('click', function() {
+  alert('test');
+});
+
+var buttonsArray = ['rock', 'paper', 'scissors'];
+
 
 
 for (var i = 0; i < buttons.length; i++){
 }
-var currentElement = buttons[i];
 
+var currentElement = buttons[i];
+*/
 
 
 
