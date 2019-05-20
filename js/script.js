@@ -9,17 +9,37 @@ var outputPlayerScore = document.getElementById('player-result');
 var outputComputerScore = document.getElementById('pc-result');
 var outputRound = document.getElementById('round');
 var outputRoundsLeft = document.getElementById('rounds-left');
+var newGameBtn = document.getElementById('new-game-btn');
+var newGameOutput = document.getElementById('new-game-output');
 
 var results = {
   round: 0,
   userResult: 0,
   computerResult: 0,
+  roundsLeft: 0,
 };
+
+newGameBtn.addEventListener('click', function() {
+  var numberOfRounds = window.prompt('Enter the number of rounds');
+
+  if (numberOfRounds == null || numberOfRounds == '') {
+    newGameOutput.innerHTML = ('Enter the number of rounds!');
+  }
+
+  else if (!isNaN(numberOfRounds)) {
+    results.roundsLeft = numberOfRounds;
+    outputRoundsLeft.innerHTML = results.roundsLeft;
+    //console.log(results.roundsLeft);
+  }
+
+  else {
+    newGameOutput.innerHTML = ('It is not a number!');
+  }
+});
 
 var resultsOutput = function(text) {
   output.innerHTML = text;
 };
-
 //First message
 resultsOutput(firstMessage);
 
@@ -28,6 +48,8 @@ var playerMove = function(playerChoice) {
   var computerChoice = randomPcChoice();
   results.round += 1;
   outputRound.innerHTML = results.round;
+  results.roundsLeft--;
+  outputRoundsLeft.innerHTML = results.roundsLeft;
 //rock = 1
 //paper = 2
 //scissors = 3
@@ -54,6 +76,18 @@ var playerMove = function(playerChoice) {
     results.computerResult += 1;
     outputComputerScore.innerHTML = results.computerResult;
   }
+
+  if (results.roundsLeft === 0 && results.userResult > results.computerResult) {
+    resultsOutput('GAME OVER<br><strong>YOU</strong> won entire game!');
+  }
+
+  else if (results.roundsLeft === 0 && results.userResult < results.computerResult) {
+    resultsOutput('GAME OVER<br><strong>COMPUTER</strong> won entire game!');
+  }
+
+  else if (results.roundsLeft === 0 && results.userResult == results.computerResult) {
+    resultsOutput('GAME OVER<br><strong>DRAW!</strong>');
+  }
     //console.log(results);
     //console.log(playerChoice);
     //console.log(computerChoice);
@@ -65,15 +99,33 @@ var randomPcChoice = function() {
 };
 
 rockBtn.addEventListener('click', function() {
-  playerMove('ROCK');
+  if (results.roundsLeft === 0) {
+    newGameOutput.innerHTML = ('Please click <strong>"New Game"</strong> button<br>to set the number of rounds')
+  }
+  else {
+    playerMove('ROCK');
+    newGameOutput.innerHTML = ('<br>');
+  }
 });
 
 paperBtn.addEventListener('click', function() {
-  playerMove('PAPER');
+  if (results.roundsLeft === 0) {
+    newGameOutput.innerHTML = ('Please click <strong>"New Game"</strong> button<br>to set the number of rounds')
+  }
+  else {
+    playerMove('PAPER');
+    newGameOutput.innerHTML = ('<br>');
+  }
 });
 
 scissorsBtn.addEventListener('click', function() {
-  playerMove('SCISSORS');
+  if (results.roundsLeft === 0) {
+    newGameOutput.innerHTML = ('Please click <strong>"New Game"</strong> button<br>to set the number of rounds')
+  }
+  else {
+    playerMove('SCISSORS');
+    newGameOutput.innerHTML = ('<br>');
+  }
 });
 
 /*

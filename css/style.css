@@ -30,3 +30,5 @@ body { background-color: #846523; font-family: 'Montserrat', sans-serif; }
 #new-game-btn { width: 150px; padding: 15px; font-size: 20px; font-weight: bold; border-radius: 5px; border: none; cursor: pointer; outline: none; }
 
 #new-game-btn:hover { background-color: #FFF; }
+
+#new-game-output { font-size: 30px; }
