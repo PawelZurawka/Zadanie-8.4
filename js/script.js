@@ -44,7 +44,7 @@ var playerMove = function(playerChoice) {
   if (playerChoice === computerChoice) {
       resultsOutput('Computer choose ' + computerChoice + '<br>REMIS!<br>');
   }
-  else if ((playerChoice === 1 && computerChoice === 3) || (playerChoice === 2 && computerChoice === 1) || (playerChoice === 3 && computerChoice === 2)) {
+  else if ((playerChoice === 'ROCK' && computerChoice === 'SCISSORS') || (playerChoice === 'PAPER' && computerChoice === 'ROCK') || (playerChoice === 'SCISSORS' && computerChoice === 'PAPER')) {
     resultsOutput('Computer choose ' + computerChoice + '<br>WYGRAŁEŚ!<br>');
   }
   else {
@@ -60,17 +60,17 @@ var randomPcChoice = function() {
 };
 
 rockBtn.addEventListener('click', function() {
-  playerMove(1);
+  playerMove('ROCK');
   output.insertAdjacentHTML('afterbegin', 'You choose ROCK<br>');
 });
 
 paperBtn.addEventListener('click', function() {
-  playerMove(2);
+  playerMove('PAPER');
   output.insertAdjacentHTML('afterbegin', 'You choose PAPER<br>');
 });
 
 scissorsBtn.addEventListener('click', function() {
-  playerMove(3);
+  playerMove('SCISSORS');
   output.insertAdjacentHTML('afterbegin', 'You choose SCISSORS<br>');
 });
 
