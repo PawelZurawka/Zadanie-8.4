@@ -4,21 +4,21 @@ var paperBtn = document.getElementById('paper-btn');
 var scissorsBtn = document.getElementById('scissors-btn');
 var output = document.getElementById('result-output');
 var firstMessage = 'What you choose? Rock, paper or scissors?';
-//var buttons = document.getElementsByClassName('allbuttons');
+//var buttons = document.getElementsByClassName('buttons');
+var outputPlayerScore = document.getElementById('player-result');
+var outputComputerScore = document.getElementById('pc-result');
+var outputRound = document.getElementById('round');
+var outputRoundsLeft = document.getElementById('rounds-left');
+
+var results = {
+  round: 0,
+  userResult: 0,
+  computerResult: 0,
+};
 
 var resultsOutput = function(text) {
   output.innerHTML = text;
 };
-
-//function numToText(result) {
- // if (result == 1) {
- //   return "ROCK";
- // } else if (result == 2) {
- //   return "PAPER";
- // } else if (result == 3) {
- //   return "SCISSORS";
- // }
-//}
 
 //First message
 resultsOutput(firstMessage);
@@ -26,32 +26,37 @@ resultsOutput(firstMessage);
 //Player move
 var playerMove = function(playerChoice) {
   var computerChoice = randomPcChoice();
-
+  results.round += 1;
+  outputRound.innerHTML = results.round;
+//rock = 1
+//paper = 2
+//scissors = 3
   if (computerChoice === 1) {
     computerChoice = 'ROCK';
   }
-
   else if (computerChoice === 2) {
     computerChoice = 'PAPER';
   }
-
   else {
     computerChoice = 'SCISSORS';
   }
-  //rock = 1
-  //paper = 2
-  //scissors = 3
+  
   if (playerChoice === computerChoice) {
-      resultsOutput('Computer choose ' + computerChoice + '<br>REMIS!<br>');
+    resultsOutput('DRAW!<br>You and Computer played:<br>' + playerChoice);
   }
   else if ((playerChoice === 'ROCK' && computerChoice === 'SCISSORS') || (playerChoice === 'PAPER' && computerChoice === 'ROCK') || (playerChoice === 'SCISSORS' && computerChoice === 'PAPER')) {
-    resultsOutput('Computer choose ' + computerChoice + '<br>WYGRAŁEŚ!<br>');
+    resultsOutput('YOU WON!<br>You played: ' + playerChoice + '<br>' + 'Computer played: ' + computerChoice);
+    results.userResult += 1;
+    outputPlayerScore.innerHTML = results.userResult;
   }
   else {
-    resultsOutput('Computer choose ' + computerChoice + '<br>PRZEGRAŁEŚ!<br>');
+    resultsOutput('YOU LOST!<br>You played: ' + playerChoice + '<br>' + 'Computer played: ' + computerChoice);
+    results.computerResult += 1;
+    outputComputerScore.innerHTML = results.computerResult;
   }
-    console.log(playerChoice);
-    console.log(computerChoice);
+    //console.log(results);
+    //console.log(playerChoice);
+    //console.log(computerChoice);
 };
 
 //Random computer choice
@@ -61,17 +66,14 @@ var randomPcChoice = function() {
 
 rockBtn.addEventListener('click', function() {
   playerMove('ROCK');
-  output.insertAdjacentHTML('afterbegin', 'You choose ROCK<br>');
 });
 
 paperBtn.addEventListener('click', function() {
   playerMove('PAPER');
-  output.insertAdjacentHTML('afterbegin', 'You choose PAPER<br>');
 });
 
 scissorsBtn.addEventListener('click', function() {
   playerMove('SCISSORS');
-  output.insertAdjacentHTML('afterbegin', 'You choose SCISSORS<br>');
 });
 
 /*

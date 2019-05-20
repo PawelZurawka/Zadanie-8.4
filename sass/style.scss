@@ -24,7 +24,7 @@ body {
   margin: 50px auto;
 }
 
-.allbuttons {
+.buttons {
   padding: 20px;
   border-radius: 5px;
   border: none;
@@ -65,11 +65,16 @@ body {
 }
 
 #player, #pc {
-  font-size: 20px;
+  font-size: 25px;
 }
 
-#rounds-left {
+#rounds-left, #rounds {
   font-size: 30px;
+}
+
+.rounds {
+  font-size: 30px;
+  margin-bottom: 20px;
 }
 
 #new-game-btn {
