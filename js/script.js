@@ -3,7 +3,8 @@ var rockBtn = document.getElementById('rock-btn');
 var paperBtn = document.getElementById('paper-btn');
 var scissorsBtn = document.getElementById('scissors-btn');
 var output = document.getElementById('result-output');
-var firstMessage = 'What you choose? Rock, paper or scissors?';
+var firstMessage = 'Please click <strong>"New Game"</strong> button<br>to set the number of rounds';
+var choice = 'What you choose? Rock, paper or scissors?';
 //var buttons = document.getElementsByClassName('buttons');
 var outputPlayerScore = document.getElementById('player-result');
 var outputComputerScore = document.getElementById('pc-result');
@@ -21,6 +22,9 @@ var results = {
 
 newGameBtn.addEventListener('click', function() {
   var numberOfRounds = window.prompt('Enter the number of rounds');
+  results.round = 0;
+  results.userResult = 0;
+  results.computerResult = 0;
 
   if (numberOfRounds == null || numberOfRounds == '') {
     newGameOutput.innerHTML = ('Enter the number of rounds!');
@@ -40,8 +44,11 @@ newGameBtn.addEventListener('click', function() {
 var resultsOutput = function(text) {
   output.innerHTML = text;
 };
+var newGameMsg = function(text) {
+  newGameOutput.innerHTML = text;
+}
 //First message
-resultsOutput(firstMessage);
+newGameMsg(firstMessage);
 
 //Player move
 var playerMove = function(playerChoice) {
@@ -100,31 +107,31 @@ var randomPcChoice = function() {
 
 rockBtn.addEventListener('click', function() {
   if (results.roundsLeft === 0) {
-    newGameOutput.innerHTML = ('Please click <strong>"New Game"</strong> button<br>to set the number of rounds')
+    newGameMsg(firstMessage);
   }
   else {
     playerMove('ROCK');
-    newGameOutput.innerHTML = ('<br>');
+    newGameMsg(choice);
   }
 });
 
 paperBtn.addEventListener('click', function() {
   if (results.roundsLeft === 0) {
-    newGameOutput.innerHTML = ('Please click <strong>"New Game"</strong> button<br>to set the number of rounds')
+    newGameMsg(firstMessage);
   }
   else {
     playerMove('PAPER');
-    newGameOutput.innerHTML = ('<br>');
+    newGameMsg(choice);
   }
 });
 
 scissorsBtn.addEventListener('click', function() {
   if (results.roundsLeft === 0) {
-    newGameOutput.innerHTML = ('Please click <strong>"New Game"</strong> button<br>to set the number of rounds')
+    newGameMsg(firstMessage);
   }
   else {
     playerMove('SCISSORS');
-    newGameOutput.innerHTML = ('<br>');
+    newGameMsg(choice);
   }
 });
 
@@ -144,11 +151,6 @@ for (var i = 0; i < buttons.length; i++){
 
 var currentElement = buttons[i];
 */
-
-
-
-
-
 
 /*var rock = rockBtn.dataset.rock;
 var paper = paperBtn.dataset.paper;
