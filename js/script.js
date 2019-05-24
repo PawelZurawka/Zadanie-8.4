@@ -1,11 +1,8 @@
 'use strict'
-var rockBtn = document.getElementById('rock-btn');
-var paperBtn = document.getElementById('paper-btn');
-var scissorsBtn = document.getElementById('scissors-btn');
 var output = document.getElementById('result-output');
 var firstMessage = 'Please click <strong>"New Game"</strong> button<br>to set the number of rounds';
 var choice = 'What you choose? Rock, paper or scissors?';
-//var buttons = document.getElementsByClassName('buttons');
+var buttons = document.querySelectorAll('.buttons');
 var outputPlayerScore = document.getElementById('player-result');
 var outputComputerScore = document.getElementById('pc-result');
 var outputRound = document.getElementById('round');
@@ -19,12 +16,21 @@ var results = {
   computerResult: 0,
   roundsLeft: 0,
 };
+//Random computer choice
+var randomPcChoice = function() {
+  return Math.floor(Math.random() * 3 + 1);
+};
+
+//End game function///////////////
+//var endGame = function(text) {/////////////
+//  newGameMsg(text);////////////////
+//};
 
 newGameBtn.addEventListener('click', function() {
   var numberOfRounds = window.prompt('Enter the number of rounds');
-  results.round = 0;
-  results.userResult = 0;
-  results.computerResult = 0;
+  results.round = 0;////////////////////
+  results.userResult = 0;////////////////
+  results.computerResult = 0;/////////////////
 
   if (numberOfRounds == null || numberOfRounds == '') {
     newGameOutput.innerHTML = ('Enter the number of rounds!');
@@ -33,7 +39,6 @@ newGameBtn.addEventListener('click', function() {
   else if (!isNaN(numberOfRounds)) {
     results.roundsLeft = numberOfRounds;
     outputRoundsLeft.innerHTML = results.roundsLeft;
-    //console.log(results.roundsLeft);
   }
 
   else {
@@ -60,6 +65,12 @@ var playerMove = function(playerChoice) {
 //rock = 1
 //paper = 2
 //scissors = 3
+  if (results.roundsLeft === 0) { /////////////
+    newGameMsg(firstMessage); ///////////////////
+  }
+  else {
+    newGameMsg(choice);///////////////
+  }
   if (computerChoice === 1) {
     computerChoice = 'ROCK';
   }
@@ -84,29 +95,48 @@ var playerMove = function(playerChoice) {
     outputComputerScore.innerHTML = results.computerResult;
   }
 
-  if (results.roundsLeft === 0 && results.userResult > results.computerResult) {
-    resultsOutput('GAME OVER<br><strong>YOU</strong> won entire game!');
+  if (results.roundsLeft === 0 && results.userResult > results.computerResult) {///////////////
+    resultsOutput('GAME OVER<br><strong>YOU</strong> won entire game!');///////////////////////
+    
   }
 
-  else if (results.roundsLeft === 0 && results.userResult < results.computerResult) {
-    resultsOutput('GAME OVER<br><strong>COMPUTER</strong> won entire game!');
+  else if (results.roundsLeft === 0 && results.userResult < results.computerResult) {///////////
+    resultsOutput('GAME OVER<br><strong>COMPUTER</strong> won entire game!');/////////////
   }
 
-  else if (results.roundsLeft === 0 && results.userResult == results.computerResult) {
-    resultsOutput('GAME OVER<br><strong>DRAW!</strong>');
+  else if (results.roundsLeft === 0 && results.userResult == results.computerResult) {///////////
+    resultsOutput('GAME OVER<br><strong>DRAW!</strong>');////////////////////
   }
-    //console.log(results);
-    //console.log(playerChoice);
-    //console.log(computerChoice);
 };
 
-//Random computer choice
-var randomPcChoice = function() {
-  return Math.floor(Math.random() * 3 + 1);
-};
+//Player choice
+for (var i = 0; i < buttons.length; i++) {
+  var self = buttons[i];
 
+  self.addEventListener('click', function (event) {  
+      playerMove(event.currentTarget.dataset.move);/////////event?
+  }, false);
+}
+
+
+/*
+//-Żeby wyzerować pola po skończeniu ostatniej rundy myślę, że lekko bym to zmodyfikował i cały kod odpowiedzialny 
+za to co się dzieje jeżeli `results.roundsLeft === 0` przeniósłbym do osobnej funkcji i wywołał ją w odpowiednim 
+ifie (if (results.roundsLeft === 0) { endGame(); }), a w środku przez innerHTML wyczyścił potrzebne pola. 
+- przenieśmy część odpowiedzialną za 'zakończenie gry' do osobnej funkcji i wywołujmy ją w playerMove jeżeli liczba 
+pozostałych rund jest równa 0,
+- usuńmy zbędny kod, console-logi,
+- przykład z pętlą do buttonów - https://codepen.io/anon/pen/VOyBwO,
+*/
+
+
+/*var rockBtn = document.getElementById('rock-btn');
+var paperBtn = document.getElementById('paper-btn');
+var scissorsBtn = document.getElementById('scissors-btn');
+
+//Player choice
 rockBtn.addEventListener('click', function() {
-  if (results.roundsLeft === 0) {
+  if (results.roundsLeft === 0) {////////////////
     newGameMsg(firstMessage);
   }
   else {
@@ -116,7 +146,7 @@ rockBtn.addEventListener('click', function() {
 });
 
 paperBtn.addEventListener('click', function() {
-  if (results.roundsLeft === 0) {
+  if (results.roundsLeft === 0) {////////////
     newGameMsg(firstMessage);
   }
   else {
@@ -126,31 +156,14 @@ paperBtn.addEventListener('click', function() {
 });
 
 scissorsBtn.addEventListener('click', function() {
-  if (results.roundsLeft === 0) {
+  if (results.roundsLeft === 0) {////////////
     newGameMsg(firstMessage);
   }
   else {
     playerMove('SCISSORS');
     newGameMsg(choice);
   }
-});
-
-/*
-
-
-buttons.addEventListener('click', function() {
-  alert('test');
-});
-
-var buttonsArray = ['rock', 'paper', 'scissors'];
-
-
-
-for (var i = 0; i < buttons.length; i++){
-}
-
-var currentElement = buttons[i];
-*/
+});*/
 
 /*var rock = rockBtn.dataset.rock;
 var paper = paperBtn.dataset.paper;
@@ -158,27 +171,3 @@ var scissors = scissorsBtn.dataset.scissors;*/
 
 //e.target.getAttribute('data-move')
 
-
-/*rockBtn.addEventListener('click', function() {
-  //???
-       resultsOutput('You click on stone');
-});
-
-paperBtn.addEventListener('click', function() {
-     playerMove("paper");
-     output.innerHTML = 'You click on paper';
-});
-
-scissorsBtn.addEventListener('click', function() {
-      playerMove("scissors");
-      output.innerHTML = 'You click on scissors';
-});*/
-
-//Computer random choice
-/*var randomComputerChoice = function { 
-}*/
-/*var playerMove;
-var computerMove = ???(Math.floor(Math.random() * 3);
-var playerMove = function(move) {
-  this.
-}*/
