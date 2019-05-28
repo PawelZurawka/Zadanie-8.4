@@ -17,7 +17,7 @@ var results = {
   roundsLeft: 0,
 };
 //Block buttons
-var check = function (event) {
+var blockButtons = function (event) {
   for(var i = 0; i < buttons.length; i++) {
     buttons[i].disabled = event;
   }
@@ -50,7 +50,7 @@ newGameBtn.addEventListener('click', function() {
   else {
     newGameOutput.innerHTML = ('It is not a number!');
   }
-  check(false);
+  blockButtons(false);
 });
 
 var resultsOutput = function(text) {
@@ -117,7 +117,7 @@ var endGame = function() {
     resultsOutput('GAME OVER<br><strong>DRAW!</strong>');
   }
   newGameMsg(firstMessage);
-  check(true);
+  blockButtons(true);
 };
 
 //Player choice
@@ -127,6 +127,6 @@ for (var i = 0; i < buttons.length; i++) {
       playerMove(event.currentTarget.dataset.move);
   }, false);
   if (results.roundsLeft === 0) {
-    check(true);
+    blockButtons(true);
   }
 }
